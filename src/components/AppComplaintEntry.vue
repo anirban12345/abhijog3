@@ -38,17 +38,17 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form @submit.prevent="addPdata">
                 <div class="card-body">
                   <div class="form-group">
                   <label for="complaintype">Complaint Type</label>
-                  <select class="custom-select rounded-0" id="complaintype">                    
-                    <option :value="type.name" v-for="type in ctype" :key="type.id">{{type.name}}</option>                    
+                  <select class="custom-select rounded-0" id="complaintype" v-model="newData.complaintype" name="complaintype">                                        
+                    <option  :value="type.name" v-for="type in ctype" :key="type.id">{{type.name}}</option>                    
                   </select>
                   </div>
                   <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" placeholder="Enter Subject">
+                    <input type="text" class="form-control" id="subject" v-model="newData.subject" name="subject" placeholder="Enter Subject">
                   </div>                                    
                 </div>
                 <!-- /.card-body -->
@@ -83,13 +83,23 @@ export default {
   },
   data()
   {
-    return {
-      ctype: [
-      {id: 1, name: 'Helpline'},
-      {id: 2, name: 'Phone Call'},
-      {id: 3, name: 'Emial id'}
-    ]}
-  } 
+    return {            
+      ctype: [{id: 1, name: 'Helpline'},
+              {id: 2, name: 'Phone Call'},
+              {id: 3, name: 'Emial id'}],
+      newData:{
+            complaintype:'',
+            subject:''
+      }
+    }
+  },
+  methods:{
+    addPdata()
+    {
+        alert(this.newData.complaintype);
+        alert(this.newData.subject);
+    }
+  }
 }
 </script>
 

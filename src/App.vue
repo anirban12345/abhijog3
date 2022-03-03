@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <AppHeader />
     <AppSidebar />
     <AppHome />
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+
 import AppHome from './components/AppHome.vue'
 import AppHeader from './components/AppHeader.vue'
 import AppSidebar from './components/AppSidebar.vue'

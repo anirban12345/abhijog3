@@ -41,41 +41,28 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
          
-          <li class="nav-item">
-            <a href="widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets                
-              </p>
-            </a>
+         
+          <li class="nav-item">            
+            <router-link to="/" class="nav-link "><i class="nav-icon fas fa-home"></i> Dashboard</router-link>
           </li>
           
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                Tables
+                Complaint
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="simple.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
-                </a>
+                <router-link to="/complaintEntry" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Entry</router-link>
               </li>
               <li class="nav-item">
-                <a href="data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
-                </a>
+                <router-link to="/complaintSearch" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Search</router-link>
               </li>
               <li class="nav-item">
-                <a href="jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
-                </a>
+                <router-link to="/about" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> About</router-link>
               </li>
             </ul>
           </li>

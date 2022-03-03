@@ -1,8 +1,8 @@
 <template>
   <div>
-    
+
     <AppHeader />
-    <AppSidebar />
+    <AppSidebar title="Abhijog" />
     <AppHome />
     <AppFooter />
   

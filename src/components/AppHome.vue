@@ -1,9 +1,8 @@
 <template>
 
 <div>
-  
-<AppHeader />
-<AppSidebar />
+
+
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -610,20 +609,18 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<AppFooter />
+
 </div>
  
 </template>
 
 <script>
-import AppHeader from './AppHeader.vue'
-import AppSidebar from './AppSidebar.vue'
-import AppFooter from './AppFooter.vue'
+
 
 export default {
   name: 'AppHome',
   components:{
-      AppHeader,AppSidebar,AppFooter,
+      
   }  
 }
 </script>

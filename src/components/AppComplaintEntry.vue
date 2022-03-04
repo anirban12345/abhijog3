@@ -48,7 +48,7 @@
                   </div>
                   <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" v-model="newData.subject" name="subject" placeholder="Enter Subject">
+                    <input type="text" class="form-control" id="subject" v-model="newData.subject" name="subject" placeholder="Enter Subject" autocomplete="off" />
                   </div>                                    
                 </div>
                 <!-- /.card-body -->

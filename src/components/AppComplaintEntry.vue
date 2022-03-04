@@ -43,7 +43,7 @@
                   <div class="form-group">
                   <label for="complaintype">Complaint Type</label>
                   <select class="custom-select rounded-0" id="complaintype" v-model="newData.complaintype" name="complaintype">                                        
-                    <option  :value="type.name" v-for="type in ctype" :key="type.id">{{type.name}}</option>                    
+                    <option  :value="type" v-for="type in ctype" :key="type">{{type}}</option>                    
                   </select>
                   </div>
                   <div class="form-group">
@@ -84,11 +84,9 @@ export default {
   data()
   {
     return {            
-      ctype: [{id: 1, name: 'Helpline'},
-              {id: 2, name: 'Phone Call'},
-              {id: 3, name: 'Emial id'}],
+      ctype: ['Helpline','Phone Call','Emial id'],
       newData:{
-            complaintype:'',
+            complaintype:'Helpline',
             subject:''
       }
     }

@@ -126,7 +126,7 @@ export default {
     },
     
     searchPoliceStation() {
-      PSDataService.findByTitle(this.title)
+      PSDataService.findByTitle(this.ps_name)
         .then(response => {
           this.policeStation = response.data;
           this.setActiveTutorial(null);

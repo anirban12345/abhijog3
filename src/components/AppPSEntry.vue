@@ -12,12 +12,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Complaint</h1>
+            <h1 class="m-0">Police Station</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Complaint</a></li>
-              <li class="breadcrumb-item active">Complaint Entry</li>
+              <li class="breadcrumb-item"><a href="#">Police Station</a></li>
+              <li class="breadcrumb-item active">Police Station Entry</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -39,17 +39,23 @@
               <!-- /.card-header -->
               <!-- form start -->
               <form @submit.prevent="addPdata">
-                <div class="card-body">
+                <div class="card-body">                  
                   <div class="form-group">
-                  <label for="complaintype">Complaint Type</label>
-                  <select class="custom-select rounded-0" id="complaintype" v-model="newData.complaintype" name="complaintype">                                        
-                    <option  :value="type" v-for="type in ctype" :key="type">{{type}}</option>                    
-                  </select>
+                    <label for="name">Police Station Name</label>
+                    <input type="text" class="form-control" id="name" v-model="newData.name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
+                  </div>                                    
+                  <div class="form-group">
+                    <label for="address">Police Station Address</label>
+                    <input type="text" class="form-control" id="address" v-model="newData.address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
                   </div>
                   <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" v-model="newData.subject" name="subject" placeholder="Enter Subject" autocomplete="off" />
-                  </div>                                    
+                    <label for="emailid">Police Station Email Id</label>
+                    <input type="text" class="form-control" id="emailid" v-model="newData.emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
+                  </div>
+                  <div class="form-group">
+                    <label for="phoneno">Police Station Phone No</label>
+                    <input type="text" class="form-control" id="phoneno" v-model="newData.phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
+                  </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -77,25 +83,28 @@ import AppSidebar from './AppSidebar.vue'
 import AppFooter from './AppFooter.vue'
 
 export default {
-  name: 'AppComplaintEntry',
+  name: 'AppPSEntry',
   components:{
      AppHeader,AppSidebar,AppFooter, 
   },
   data()
   {
-    return {            
-      ctype: ['Helpline','Phone Call','Emial id'],
+    return {                  
       newData:{
-            complaintype:'Helpline',
-            subject:''
+            name: '',
+            address:'',
+            emailid:'',
+            phoneno:''
       }
     }
   },
   methods:{
     addPdata()
     {
-        alert(this.newData.complaintype);
-        alert(this.newData.subject);
+        alert(this.newData.name);
+        alert(this.newData.address);
+        alert(this.newData.emailid);
+        alert(this.newData.phoneno);
     }
   }
 }

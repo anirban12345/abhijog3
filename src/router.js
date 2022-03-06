@@ -1,10 +1,13 @@
 import {createRouter,createWebHistory} from 'vue-router'
 import AppHome from './components/AppHome'
-import AppComplaintEntry from './components/AppComplaintEntry'
+import AppPSEntry from './components/AppPSEntry'
+import AppPS from './components/AppPS'
 
 const routes = [
     { path: '/', component: AppHome },
-    { path: '/complaintentry', component: AppComplaintEntry },
+    { path: '/psentry', component: AppPSEntry },
+    { path: '/psedit', component: AppPS },
+    { path: '/pssearch', component: AppPS },    
   ]
   
 const router = createRouter({

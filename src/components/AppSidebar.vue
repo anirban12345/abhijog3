@@ -50,16 +50,16 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Complaint
+                Police Station
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/complaintEntry" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Entry</router-link>
+                <router-link to="/psentry" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Entry</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/complaintSearch" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Search</router-link>
+                <router-link to="/pssearch" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Search</router-link>
               </li>
               <li class="nav-item">
                 <router-link to="/about" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> About</router-link>

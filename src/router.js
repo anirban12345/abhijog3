@@ -6,7 +6,7 @@ import AppPS from './components/AppPS'
 const routes = [
     { path: '/', component: AppHome },
     { path: '/psentry', component: AppPSEntry },
-    { path: '/psedit', component: AppPS },
+    { path: '/psedit/', component: AppPS },
     { path: '/pssearch', component: AppPS },    
   ]
   

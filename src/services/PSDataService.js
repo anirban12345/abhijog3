@@ -25,8 +25,8 @@ class PSDataService {
     return http.delete(`/PSApi`);
   }
 
-  findByTitle(title) {
-    return http.get(`/PSApi?ps_id=${title}`);
+  findByPSname(psname) {
+    return http.get(`/PSApi?ps_name=${psname}`);
   }
 }
 

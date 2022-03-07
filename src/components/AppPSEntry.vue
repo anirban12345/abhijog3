@@ -120,7 +120,7 @@ export default {
       PSDataService.create(data)
         .then(response => {
           //this.policeStation.name = response.data.ps_name;
-          console.log(response.data);
+          console.log(response);
           this.submitted = true;
         })
         .catch(e => {

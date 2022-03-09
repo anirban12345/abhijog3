@@ -83,7 +83,8 @@
 </template>
 
 <script>
-import PSDataService from "../services/PSDataService";
+//import PSDataService from "../services/PSDataService";
+import axios from 'axios'
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -113,19 +114,15 @@ export default {
         ps_emailid: this.policeStation.emailid,
         ps_phoneno: this.policeStation.phoneno,
       }
-
       console.log(data);
 
+    axios.post("http://localhost:8080/test/MyApi.php", data, {"Access-Control-Allow-Origin": "*"})
+    .then(response => this.data.ps_name = response)
+    .catch(error => {
+      this.errorMessage = error.message;
+      console.error("There was an error!", error);
+    });
 
-      PSDataService.create(data)
-        .then(response => {
-          //this.policeStation.name = response.data.ps_name;
-          console.log(response);
-          this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
     },
     
     newPoliceStation() {

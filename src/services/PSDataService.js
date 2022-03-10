@@ -2,18 +2,15 @@ import http from "../http-common";
 
 class PSDataService {
   getAll() {
-    return http.get("/MyApi.php");
+    return http.get("/PSApi");
   }
 
   get(id) {
     return http.get(`/MyApi.php/${id}`);
   }
 
-  create(data) {
-    const headers = { 
-      'Access-Control-Allow-Origin': '*'      
-    };
-    return http.post("/MyApi.php", data,{headers});
+  create(data) {    
+    return http.post("/PSApi", data);
   }
 
   update(id, data) {

@@ -2,8 +2,7 @@
 // vue.config.js
 const { defineConfig } = require('@vue/cli-service')
 
-module.exports = defineConfig({
-  proxy: 'http://localhost:8080',
+module.exports = defineConfig({  
   port: 8081
 })
 

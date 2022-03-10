@@ -38,7 +38,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form @submit.prevent>
+              <form @submit.prevent="savePoliceStation" method="post">
                 <div v-if="!submitted">
                 <div class="card-body">                  
                   <div class="form-group">
@@ -60,7 +60,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">                  
-                  <button @click="savePoliceStation" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success">Save</button>
                 </div>
                 </div>
                 <div v-else>
@@ -107,23 +107,21 @@ export default {
     };
   },
   methods: {
-    savePoliceStation() {
-      var data = {
+    async savePoliceStation() {
+      var DATA = {
         ps_name: this.policeStation.name,
         ps_address: this.policeStation.address,
         ps_emailid: this.policeStation.emailid,
         ps_phoneno: this.policeStation.phoneno,
       }
-      console.log(data);
+      console.log(DATA);
 
-    axios.post("http://localhost:8080/test/MyApi.php", data, {"Access-Control-Allow-Origin": "*"})
-    .then(response => this.data.ps_name = response)
-    .catch(error => {
-      this.errorMessage = error.message;
-      console.error("There was an error!", error);
-    });
-
-    },
+      const config = {
+      headers: { "Content-Type": "application/json"}
+      };
+      const response = await axios.post("http://localhost:8080/MyApi/PSApi", DATA, config);
+      console.log(response.data);
+      },
     
     newPoliceStation() {
       this.submitted = false;

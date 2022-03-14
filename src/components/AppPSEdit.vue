@@ -2,8 +2,8 @@
 
 <div>
 
-<AppHeader />
-<AppSidebar title="Abhijog" />
+<!-- <AppHeader />
+<AppSidebar title="Abhijog" /> -->
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -43,19 +43,19 @@
                 <div class="card-body">                  
                   <div class="form-group">
                     <label for="name">Police Station Name</label>
-                    <input type="text" class="form-control" id="name" v-model="policeStation.name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
+                    <input type="text" class="form-control" id="name" v-model="policeStation.ps_name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
                   </div>                                    
                   <div class="form-group">
                     <label for="address">Police Station Address</label>
-                    <input type="text" class="form-control" id="address" v-model="policeStation.address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
+                    <input type="text" class="form-control" id="address" v-model="policeStation.ps_address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
                   </div>
                   <div class="form-group">
                     <label for="emailid">Police Station Email Id</label>
-                    <input type="text" class="form-control" id="emailid" v-model="policeStation.emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
+                    <input type="text" class="form-control" id="emailid" v-model="policeStation.ps_emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
                   </div>
                   <div class="form-group">
                     <label for="phoneno">Police Station Phone No</label>
-                    <input type="text" class="form-control" id="phoneno" v-model="policeStation.phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
+                    <input type="text" class="form-control" id="phoneno" v-model="policeStation.ps_phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -74,7 +74,7 @@
     <p>{{ message }}</p>
   </div>
   <!-- /.content-wrapper -->
-  <AppFooter />
+  <!-- <AppFooter /> -->
 </div>
  
 </template>
@@ -83,14 +83,14 @@
 import PSDataService from "../services/PSDataService";
 //import axios from 'axios'
 
-import AppHeader from './AppHeader.vue'
-import AppSidebar from './AppSidebar.vue'
-import AppFooter from './AppFooter.vue'
+// import AppHeader from './AppHeader.vue'
+// import AppSidebar from './AppSidebar.vue'
+// import AppFooter from './AppFooter.vue'
 
 export default {
   name: 'AppPSEdit',
   components:{
-     AppHeader,AppSidebar,AppFooter, 
+     //AppHeader,AppSidebar,AppFooter, 
   },
   data() {
     return {

@@ -2,8 +2,8 @@
 
 <div>
 
-<!-- <AppHeader />
-<AppSidebar title="Abhijog" /> -->
+<AppHeader />
+<AppSidebar title="Abhijog" />
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -74,7 +74,7 @@
     <p>{{ message }}</p>
   </div>
   <!-- /.content-wrapper -->
-  <!-- <AppFooter /> -->
+  <AppFooter />
 </div>
  
 </template>
@@ -83,14 +83,14 @@
 import PSDataService from "../services/PSDataService";
 //import axios from 'axios'
 
-// import AppHeader from './AppHeader.vue'
-// import AppSidebar from './AppSidebar.vue'
-// import AppFooter from './AppFooter.vue'
+import AppHeader from './AppHeader.vue'
+import AppSidebar from './AppSidebar.vue'
+import AppFooter from './AppFooter.vue'
 
 export default {
   name: 'AppPSEdit',
   components:{
-     //AppHeader,AppSidebar,AppFooter, 
+     AppHeader,AppSidebar,AppFooter, 
   },
   data() {
     return {

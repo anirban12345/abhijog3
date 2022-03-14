@@ -61,6 +61,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">                  
                   <button type="submit" class="btn btn-success">Update</button>
+                  <h4 class="text-success">{{ message }}</h4>
                 </div>
                 
               </form>
@@ -71,7 +72,7 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-    <p>{{ message }}</p>
+    
   </div>
   <!-- /.content-wrapper -->
   <AppFooter />
@@ -113,10 +114,10 @@ export default {
 
     async updatePoliceStation() {
       
-      PSDataService.update(this.policeStation.name, this.policeStation)
+      PSDataService.update(this.policeStation.ps_id, this.policeStation)
         .then(response => {
           console.log(response.data);
-          this.message = 'The tutorial was updated successfully!';
+          this.message = 'The Police Station was updated successfully!';
         })
         .catch(e => {
           console.log(e);

@@ -50,7 +50,10 @@
                       <td>{{ps.ps_address}}</td>
                       <td>{{ps.ps_emailid}}</td>
                       <td>{{ps.ps_phoneno}}</td>
-                      <td><router-link :to="'/psedit/' + ps.ps_id" class="btn btn-warning">Edit</router-link></td>
+                      <td>
+                        <router-link :to="'/psedit/' + ps.ps_id" class="btn btn-warning">Edit</router-link>
+                        <router-link :to="'/psdelete/' + ps.ps_id" class="btn btn-danger">Delete</router-link>
+                      </td>
                     </tr>
                   </table>
                 </div>                
@@ -96,7 +99,7 @@ export default {
       PSDataService.getAll()
         .then(response => {
           this.policeStation = response.data;
-          console.log(response.data);
+          //console.log(response.data);
         })
         .catch(e => {
           console.log(e);

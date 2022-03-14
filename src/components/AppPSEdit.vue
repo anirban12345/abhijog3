@@ -34,33 +34,35 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Entry Details</h3>
+                <h3 class="card-title">Edit Details</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form @submit.prevent="addPdata">
+              <form @submit.prevent="updatePoliceStation" method="post">
+                
                 <div class="card-body">                  
                   <div class="form-group">
                     <label for="name">Police Station Name</label>
-                    <input type="text" class="form-control" id="name" v-model="newData.name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
+                    <input type="text" class="form-control" id="name" v-model="policeStation.name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
                   </div>                                    
                   <div class="form-group">
                     <label for="address">Police Station Address</label>
-                    <input type="text" class="form-control" id="address" v-model="newData.address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
+                    <input type="text" class="form-control" id="address" v-model="policeStation.address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
                   </div>
                   <div class="form-group">
                     <label for="emailid">Police Station Email Id</label>
-                    <input type="text" class="form-control" id="emailid" v-model="newData.emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
+                    <input type="text" class="form-control" id="emailid" v-model="policeStation.emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
                   </div>
                   <div class="form-group">
                     <label for="phoneno">Police Station Phone No</label>
-                    <input type="text" class="form-control" id="phoneno" v-model="newData.phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
+                    <input type="text" class="form-control" id="phoneno" v-model="policeStation.phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
                   </div>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="card-footer">                  
+                  <button type="submit" class="btn btn-success">Update</button>
                 </div>
+                
               </form>
             </div>
             <!-- /.card -->
@@ -69,6 +71,7 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <p>{{ message }}</p>
   </div>
   <!-- /.content-wrapper -->
   <AppFooter />
@@ -77,27 +80,30 @@
 </template>
 
 <script>
+import PSDataService from "../services/PSDataService";
+//import axios from 'axios'
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
 import AppFooter from './AppFooter.vue'
 
 export default {
-  name: "AppPsEdit",
+  name: 'AppPSEdit',
   components:{
      AppHeader,AppSidebar,AppFooter, 
   },
   data() {
     return {
-      currentTutorial: null,
+      policeStation: [],
       message: ''
     };
   },
   methods: {
-    getTutorial(id) {
-      TutorialDataService.get(id)
+
+    getPstation(id) {
+      PSDataService.get(id)
         .then(response => {
-          this.currentTutorial = response.data;
+          this.policeStation = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -105,27 +111,9 @@ export default {
         });
     },
 
-    updatePublished(status) {
-      var data = {
-        id: this.currentTutorial.id,
-        title: this.currentTutorial.title,
-        description: this.currentTutorial.description,
-        published: status
-      };
-
-      TutorialDataService.update(this.currentTutorial.id, data)
-        .then(response => {
-          console.log(response.data);
-          this.currentTutorial.published = status;
-          this.message = 'The status was updated successfully!';
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-
-    updateTutorial() {
-      TutorialDataService.update(this.currentTutorial.id, this.currentTutorial)
+    async updatePoliceStation() {
+      
+      PSDataService.update(this.policeStation.name, this.policeStation)
         .then(response => {
           console.log(response.data);
           this.message = 'The tutorial was updated successfully!';
@@ -134,21 +122,10 @@ export default {
           console.log(e);
         });
     },
-
-    deleteTutorial() {
-      TutorialDataService.delete(this.currentTutorial.id)
-        .then(response => {
-          console.log(response.data);
-          this.$router.push({ name: "tutorials" });
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
   },
   mounted() {
     this.message = '';
-    this.getTutorial(this.$route.params.id);
+    this.getPstation(this.$route.params.id);
   }
 }
 </script>

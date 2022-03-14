@@ -2,31 +2,31 @@ import http from "../http-common";
 
 class PSDataService {
   getAll() {
-    return http.get("/PSApi");
+    return http.get("/policestation");
   }
 
   get(id) {
-    return http.get(`/MyApi.php/${id}`);
+    return http.get(`/policestation/${id}`);
   }
 
   create(data) {    
-    return http.post("/PSApi", data);
+    return http.post("/policestation", data);
   }
 
   update(id, data) {
-    return http.put(`/MyApi.php/${id}`, data);
+    return http.put(`/policestation/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/MyApi.php/${id}`);
+    return http.delete(`/policestation/${id}`);
   }
 
   deleteAll() {
-    return http.delete(`/MyApi.php`);
+    return http.delete(`/policestation`);
   }
 
   findByPSname(psname) {
-    return http.get(`/MyApi.php?ps_name=${psname}`);
+    return http.get(`/policestation?ps_name=${psname}`);
   }
 }
 

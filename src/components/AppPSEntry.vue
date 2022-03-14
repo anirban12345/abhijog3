@@ -83,8 +83,8 @@
 </template>
 
 <script>
-//import PSDataService from "../services/PSDataService";
-import axios from 'axios'
+import PSDataService from "../services/PSDataService";
+//import axios from 'axios'
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -108,19 +108,26 @@ export default {
   },
   methods: {
     async savePoliceStation() {
-      var DATA = {
+
+      var data = {
         ps_name: this.policeStation.name,
         ps_address: this.policeStation.address,
         ps_emailid: this.policeStation.emailid,
         ps_phoneno: this.policeStation.phoneno,
       }
-      console.log(DATA);
+      console.log(data);
 
-      const config = {
-      headers: { "Content-Type": "application/json"}
-      };
-      const response = await axios.post("http://localhost:8080/MyApi/PSApi", DATA, config);
-      console.log(response.data);
+      PSDataService.create(data)
+        .then(response => {
+          //this.policeStation.id = response.data.id;
+          console.log(response.data);
+          this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        }); 
+     
+
       },
     
     newPoliceStation() {

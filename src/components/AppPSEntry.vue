@@ -43,19 +43,19 @@
                 <div class="card-body">                  
                   <div class="form-group">
                     <label for="name">Police Station Name</label>
-                    <input type="text" class="form-control" id="name" v-model="policeStation.name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
+                    <input type="text" class="form-control" id="name" v-model="policeStation.ps_name" name="name" placeholder="Enter Police Station Name" autocomplete="off" />
                   </div>                                    
                   <div class="form-group">
                     <label for="address">Police Station Address</label>
-                    <input type="text" class="form-control" id="address" v-model="policeStation.address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
+                    <input type="text" class="form-control" id="address" v-model="policeStation.ps_address" name="address" placeholder="Enter Police Station Address" autocomplete="off" />
                   </div>
                   <div class="form-group">
                     <label for="emailid">Police Station Email Id</label>
-                    <input type="text" class="form-control" id="emailid" v-model="policeStation.emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
+                    <input type="text" class="form-control" id="emailid" v-model="policeStation.ps_emailid" name="emailid" placeholder="Enter Police Station Email Id" autocomplete="off" />
                   </div>
                   <div class="form-group">
                     <label for="phoneno">Police Station Phone No</label>
-                    <input type="text" class="form-control" id="phoneno" v-model="policeStation.phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
+                    <input type="text" class="form-control" id="phoneno" v-model="policeStation.ps_phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -98,10 +98,10 @@ export default {
   data() {
     return {
       policeStation: {        
-        name: "",
-        address: "",
-        emailid: "",
-        phoneno:""
+        ps_name: "",
+        ps_address: "",
+        ps_emailid: "",
+        ps_phoneno:""
       },
       submitted: false
     };
@@ -110,10 +110,10 @@ export default {
     async savePoliceStation() {
 
       var data = {
-        ps_name: this.policeStation.name,
-        ps_address: this.policeStation.address,
-        ps_emailid: this.policeStation.emailid,
-        ps_phoneno: this.policeStation.phoneno,
+        ps_name: this.policeStation.ps_name,
+        ps_address: this.policeStation.ps_address,
+        ps_emailid: this.policeStation.ps_emailid,
+        ps_phoneno: this.policeStation.ps_phoneno,
       }
       console.log(data);
 
@@ -121,7 +121,9 @@ export default {
         .then(response => {
           //this.policeStation.id = response.data.id;
           console.log(response.data);
-          this.submitted = true;
+          //this.submitted = true;
+          this.$swal('The Police Station was saved successfully!');
+          this.policeStation=[];
         })
         .catch(e => {
           console.log(e);

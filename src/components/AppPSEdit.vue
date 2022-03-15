@@ -61,7 +61,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">                  
                   <button type="submit" class="btn btn-success">Update</button>
-                  <h4 class="text-success">{{ message }}</h4>
+                  &nbsp;<button class="btn btn-danger" @click="deletePoliceStation(policeStation.ps_id)">Delete</button>                   
                 </div>
                 
               </form>
@@ -87,6 +87,7 @@ import PSDataService from "../services/PSDataService";
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
 import AppFooter from './AppFooter.vue'
+
 
 export default {
   name: 'AppPSEdit',
@@ -117,7 +118,19 @@ export default {
       PSDataService.update(this.policeStation.ps_id, this.policeStation)
         .then(response => {
           console.log(response.data);
-          this.message = 'The Police Station was updated successfully!';
+          //this.message = 'The Police Station was updated successfully!';
+          this.$swal('The Police Station was updated successfully!');
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    deletePoliceStation(id) {
+      PSDataService.delete(id)
+        .then(response => {
+          console.log(response.data);
+          //this.$router.push({ name: "policeStation" });
+          this.$swal('The Police Station was deleted successfully!');
         })
         .catch(e => {
           console.log(e);

@@ -51,8 +51,8 @@
                       <td>{{ps.ps_emailid}}</td>
                       <td>{{ps.ps_phoneno}}</td>
                       <td>
-                        <router-link :to="'/psedit/' + ps.ps_id" class="btn btn-warning">Edit</router-link>
-                        <router-link :to="'/psdelete/' + ps.ps_id" class="btn btn-danger">Delete</router-link>
+                        <router-link :to="'/psedit/' + ps.ps_id" class="btn btn-warning">Edit</router-link>                        
+                                               
                       </td>
                     </tr>
                   </table>
@@ -127,6 +127,7 @@ export default {
           console.log(e);
         });
     },
+    
     
     searchPoliceStation() {
       PSDataService.findByTitle(this.ps_name)

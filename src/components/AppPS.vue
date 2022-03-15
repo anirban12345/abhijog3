@@ -30,13 +30,23 @@
       <div class="container-fluid">
           <div class="row">
           <!-- left column -->
+
+          
+        
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">All PS Details</h3>
               </div>              
-                <div class="card-body table-responsive">                 
+                <div class="card-body table-responsive"> 
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by title" v-model="policeStation.ps_name"/>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" @click="searchPoliceStation">Search</button>
+                    </div>
+                  </div>
+
                   <table class="table table-bordered">
                     <tr>
                        <th>Police Station</th> 
@@ -130,10 +140,10 @@ export default {
     
     
     searchPoliceStation() {
-      PSDataService.findByTitle(this.ps_name)
+      PSDataService.findByPSname(this.policeStation.ps_name)
         .then(response => {
           this.policeStation = response.data;
-          this.setActiveTutorial(null);
+          //this.setActiveTutorial(null);
           console.log(response.data);
         })
         .catch(e => {

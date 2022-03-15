@@ -41,11 +41,9 @@
               </div>              
                 <div class="card-body table-responsive"> 
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by title" v-model="policeStation.ps_name"/>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" @click="searchPoliceStation">Search</button>
-                    </div>
+                    <input type="text" class="form-control" placeholder="Search by Police Station Name" @keyup="searchPoliceStation" v-model="ps_name"/>                    
                   </div>
+
 
                   <table class="table table-bordered">
                     <tr>
@@ -61,8 +59,7 @@
                       <td>{{ps.ps_emailid}}</td>
                       <td>{{ps.ps_phoneno}}</td>
                       <td>
-                        <router-link :to="'/psedit/' + ps.ps_id" class="btn btn-warning">Edit</router-link>                        
-                                               
+                        <router-link :to="'/psedit/' + ps.ps_id" class="btn btn-warning">Edit</router-link>
                       </td>
                     </tr>
                   </table>
@@ -98,59 +95,64 @@ export default {
   },
   data() {
     return {
+      ps_name:"",
       policeStation: [],
-      currentPS: null,
-      currentIndex: -1,
-      title: ""
+      perPage: 10,      
+      count:0,
+      page: 1,      
+      pageSize: 10,      
     };
   },
   methods: {
+    getRequestParams(search_ps_name, page, pageSize) {
+      let params = {};
+      if (search_ps_name) {
+        params["ps_name"] = search_ps_name;
+      }
+      if (page) {
+        params["page"] = page - 1;
+      }
+      if (pageSize) {
+        params["size"] = pageSize;
+      }
+      
+      return params;
+      
+    },
+    handlePageChange(value) {
+      this.page = value;
+      this.retrievePoliceStation();
+    },
+
     retrievePoliceStation() {
-      PSDataService.getAll()
+      const params = this.getRequestParams(
+        this.ps_name,
+        this.page,
+        this.pageSize
+      );
+      //console.log(params);
+      PSDataService.getAll(params)
         .then(response => {
           this.policeStation = response.data;
+          this.count=response.data.length;
+          //console.log(this.count);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    searchPoliceStation() {
+      PSDataService.findByPSname(this.ps_name)
+        .then(response => {
+          this.policeStation = response.data;
+          //this.setActiveTutorial(null);
           //console.log(response.data);
         })
         .catch(e => {
           console.log(e);
         });
-    },
-
-    refreshList() {
-      this.retrievePoliceStation();
-      this.currentPS = null;
-      this.currentIndex = -1;
-    },
-
-    setActivePoliceStation(policeStation, index) {
-      this.currentPS = policeStation;
-      this.currentIndex = policeStation ? index : -1;
-    },
-
-    removeAllPoliceStation() {
-      PSDataService.deleteAll()
-        .then(response => {
-          console.log(response.data);
-          this.refreshList();
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    
-    
-    searchPoliceStation() {
-      PSDataService.findByPSname(this.policeStation.ps_name)
-        .then(response => {
-          this.policeStation = response.data;
-          //this.setActiveTutorial(null);
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
     }
-  },
+  },  
   mounted() {
     this.retrievePoliceStation();
   }

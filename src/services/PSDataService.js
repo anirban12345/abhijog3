@@ -1,8 +1,8 @@
 import http from "../http-common";
 
 class PSDataService {
-  getAll() {
-    return http.get("/policestation");
+  getAll(params) {
+    return http.get("/policestation",{ params });
   }
 
   get(id) {

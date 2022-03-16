@@ -115,23 +115,14 @@ export default {
 
     updatePoliceStation() {
       
-      const data = {
-        ps_id: this.policeStation.ps_id,
+      var data = {        
         ps_name: this.policeStation.ps_name,
         ps_address: this.policeStation.ps_address,
         ps_emailid: this.policeStation.ps_emailid,
         ps_phoneno: this.policeStation.ps_phoneno,
       }      
-      var form = new FormData();
-      form.append('ps_id', data.ps_id);
-      form.append('ps_name', data.ps_name);
-      form.append('ps_address', data.ps_address);
-      form.append('ps_emailid', data.ps_emailid);
-      form.append('ps_phoneno', data.ps_phoneno);
-      //form.append('_method', 'PUT');
-
+      
       //console.log(data);
-
       // PSDataService.update(this.policeStation.ps_id, data)
       //   .then(response => {
       //     console.log(response.data);
@@ -143,10 +134,7 @@ export default {
       //   });
 
       console.log(data);
-
-      axios.put('http://localhost:8080/MyApi/PSApi', data);
-      //res.data.headers['Content-Type:application/json'];
-
+      axios.put('http://localhost:8080/MyApi/PSApi', data);      
     },
     deletePoliceStation(id) {
       PSDataService.delete(id)

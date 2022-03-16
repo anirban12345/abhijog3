@@ -1,8 +1,9 @@
 import http from "../http-common";
+import axios from "axios";
 
 class PSDataService {
-  getAll(params) {
-    return http.get("/PSApi",{ params });
+  getAll() {
+    return http.get("/PSApi");
   }
 
   get(id) {
@@ -26,7 +27,7 @@ class PSDataService {
   }
 
   findByPSname(psname) {
-    return http.get(`/policestation?ps_name=${psname}`);
+    return axios.get(`http://localhost:8080/MyApi/SearchApi/get_by_ps_name/${psname}`);
   }
 }
 

@@ -38,7 +38,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form @submit.prevent="updatePoliceStation" method="PUT">
+              <form @submit.prevent method="PUT">
                 
                 <div class="card-body">                  
                   <div class="form-group">
@@ -60,7 +60,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">                  
-                  <button type="submit" class="btn btn-success">Update</button>
+                  <button class="btn btn-success" @click="updatePoliceStation">Update</button>
                   &nbsp;<button class="btn btn-danger" @click="deletePoliceStation(policeStation.ps_id)">Delete</button>                   
                 </div>
                 
@@ -82,7 +82,7 @@
 
 <script>
 import PSDataService from "../services/PSDataService";
-import axios from 'axios'
+//import axios from 'axios'
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -113,30 +113,26 @@ export default {
         });
     },
 
-    updatePoliceStation() {
+    async updatePoliceStation() {
       
       const data = {        
         ps_name: this.policeStation.ps_name,
         ps_address: this.policeStation.ps_address,
         ps_emailid: this.policeStation.ps_emailid,
         ps_phoneno: this.policeStation.ps_phoneno,
-      }      
-      
-      //console.log(data);
-      // PSDataService.update(this.policeStation.ps_id, data)
-      //   .then(response => {
-      //     console.log(response.data);
-      //     //this.message = 'The Police Station was updated successfully!';
-      //     this.$swal.fire(response.data,'','info');
-      //   })
-      //   .catch(e => {
-      //     console.log(e);
-      //   });
-
+      }            
       console.log(data);
-      axios.put('http://localhost:8080/MyApi/PSApi/'+this.policeStation.ps_id, data);      
+      PSDataService.update(this.policeStation.ps_id, data)
+        .then(response => {
+          //console.log(response.data);
+          //this.message = 'The Police Station was updated successfully!';
+          this.$swal.fire(response.data[0],'','info');
+        })
+        .catch(e => {
+          console.log(e);
+        });           
     },
-    deletePoliceStation(id) {
+    async deletePoliceStation(id) {
       PSDataService.delete(id)
         .then(response => {
           //console.log(response.data);

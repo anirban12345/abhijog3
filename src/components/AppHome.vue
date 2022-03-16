@@ -34,9 +34,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{countps}}</h3>
 
-                <p>New Orders</p>
+                <p>Police Stations</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -104,11 +104,10 @@
   </div>
   <!-- /.content-wrapper -->
 <AppFooter />
-</div>
- 
+</div> 
 </template>
-
 <script>
+import PSDataService from "../services/PSDataService";
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -118,10 +117,38 @@ export default {
   name: 'AppHome',
   components:{
      AppHeader,AppSidebar,AppFooter, 
-  }  
+  },  
+  data()
+  {
+    return{
+        countps:""
+    }
+  },
+  methods:{
+    retrievePoliceStation() {
+          // const params = this.getRequestParams(
+          //   this.ps_name,
+          //   this.page,
+          //   this.pageSize
+          // );
+          //console.log(params);
+          PSDataService.getAll()
+            .then(response => {
+              //this.policeStation = response.data;
+              this.countps=response.data.length;
+              //console.log(this.count);
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
+  },
+  mounted()
+  {
+    this.retrievePoliceStation();
+  }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 

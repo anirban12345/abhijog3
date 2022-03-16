@@ -45,15 +45,18 @@
                   </div>
 
 
+                  <div class="text-info">{{count}} Records Found</div>
                   <table class="table table-bordered">
                     <tr>
-                       <th>Police Station</th> 
+                      <th>Sl No.</th> 
+                       <th>Police Station Name</th> 
                        <th>Address</th> 
                        <th>Email Id</th> 
                        <th>Phone No</th> 
                        <th>Action</th> 
                     </tr>
                     <tr v-for="(ps, index) in policeStation" :key="index">
+                      <td>{{index+1}}</td>
                       <td>{{ps.ps_name}}</td>
                       <td>{{ps.ps_address}}</td>
                       <td>{{ps.ps_emailid}}</td>
@@ -142,15 +145,31 @@ export default {
         });
     },
     searchPoliceStation() {
-      PSDataService.findByPSname(this.ps_name)
-        .then(response => {
-          this.policeStation = response.data;
-          //this.setActiveTutorial(null);
-          //console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      if(this.ps_name!="")
+      {
+        PSDataService.findByPSname(this.ps_name)
+          .then(response => {
+
+            this.policeStation = response.data;
+            //this.setActiveTutorial(null);
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+      else
+      {
+          PSDataService.getAll()
+          .then(response => {
+            this.policeStation = response.data;
+            this.count=response.data.length;
+            //console.log(this.count);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
     }
   },  
   mounted() {

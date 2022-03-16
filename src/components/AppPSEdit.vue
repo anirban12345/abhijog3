@@ -115,7 +115,7 @@ export default {
 
     updatePoliceStation() {
       
-      var data = {        
+      const data = {        
         ps_name: this.policeStation.ps_name,
         ps_address: this.policeStation.ps_address,
         ps_emailid: this.policeStation.ps_emailid,
@@ -134,7 +134,7 @@ export default {
       //   });
 
       console.log(data);
-      axios.put('http://localhost:8080/MyApi/PSApi', data);      
+      axios.put('http://localhost:8080/MyApi/PSApi/'+this.policeStation.ps_id, data);      
     },
     deletePoliceStation(id) {
       PSDataService.delete(id)

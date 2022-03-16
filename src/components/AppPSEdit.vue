@@ -38,7 +38,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form @submit.prevent="updatePoliceStation" method="post">
+              <form @submit.prevent="updatePoliceStation" method="PUT">
                 
                 <div class="card-body">                  
                   <div class="form-group">
@@ -82,7 +82,7 @@
 
 <script>
 import PSDataService from "../services/PSDataService";
-//import axios from 'axios'
+import axios from 'axios'
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -105,32 +105,55 @@ export default {
     getPstation(id) {
       PSDataService.get(id)
         .then(response => {
-          this.policeStation = response.data;
-          console.log(response.data);
+          this.policeStation = response.data[0];
+          //console.log(response.data[0]);
         })
         .catch(e => {
           console.log(e);
         });
     },
 
-    async updatePoliceStation() {
+    updatePoliceStation() {
       
-      PSDataService.update(this.policeStation.ps_id, this.policeStation)
-        .then(response => {
-          console.log(response.data);
-          //this.message = 'The Police Station was updated successfully!';
-          this.$swal('The Police Station was updated successfully!');
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      const data = {
+        ps_id: this.policeStation.ps_id,
+        ps_name: this.policeStation.ps_name,
+        ps_address: this.policeStation.ps_address,
+        ps_emailid: this.policeStation.ps_emailid,
+        ps_phoneno: this.policeStation.ps_phoneno,
+      }      
+      var form = new FormData();
+      form.append('ps_id', data.ps_id);
+      form.append('ps_name', data.ps_name);
+      form.append('ps_address', data.ps_address);
+      form.append('ps_emailid', data.ps_emailid);
+      form.append('ps_phoneno', data.ps_phoneno);
+      //form.append('_method', 'PUT');
+
+      //console.log(data);
+
+      // PSDataService.update(this.policeStation.ps_id, data)
+      //   .then(response => {
+      //     console.log(response.data);
+      //     //this.message = 'The Police Station was updated successfully!';
+      //     this.$swal.fire(response.data,'','info');
+      //   })
+      //   .catch(e => {
+      //     console.log(e);
+      //   });
+
+      console.log(data);
+
+      axios.put('http://localhost:8080/MyApi/PSApi', data);
+      //res.data.headers['Content-Type:application/json'];
+
     },
     deletePoliceStation(id) {
       PSDataService.delete(id)
         .then(response => {
-          console.log(response.data);
-          //this.$router.push({ name: "policeStation" });
-          this.$swal('The Police Station was deleted successfully!');
+          //console.log(response.data);
+          this.$router.push("/pssearch");
+          this.$swal.fire(response.data[0],'','info');
         })
         .catch(e => {
           console.log(e);

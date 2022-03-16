@@ -63,9 +63,8 @@
                   <button type="submit" class="btn btn-success">Save</button>
                 </div>
                 </div>
-                <div v-else>
-                  <h4>You submitted successfully!</h4>
-                  <button class="btn btn-success" @click="newPoliceStation">Add</button>
+                <div v-else>                  
+                  <button class="btn btn-success" @click="newPoliceStation">Add New Police Station</button>
                 </div>
               </form>
             </div>
@@ -115,14 +114,20 @@ export default {
         ps_emailid: this.policeStation.ps_emailid,
         ps_phoneno: this.policeStation.ps_phoneno,
       }
-      console.log(data);
+      //console.log(data);
 
-      PSDataService.create(data)
+      var form = new FormData();
+      form.append('ps_name', data.ps_name);
+      form.append('ps_address', data.ps_address);
+      form.append('ps_emailid', data.ps_emailid);
+      form.append('ps_phoneno', data.ps_phoneno);
+
+      PSDataService.create(form)
         .then(response => {
           //this.policeStation.id = response.data.id;
-          console.log(response.data);
-          //this.submitted = true;
-          this.$swal('The Police Station was saved successfully!');
+          //console.log(response.data);
+          this.submitted = true;
+          this.$swal.fire(response.data[0],'','success');
           this.policeStation=[];
         })
         .catch(e => {

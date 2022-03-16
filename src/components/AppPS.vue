@@ -125,13 +125,13 @@ export default {
     },
 
     retrievePoliceStation() {
-      const params = this.getRequestParams(
-        this.ps_name,
-        this.page,
-        this.pageSize
-      );
+      // const params = this.getRequestParams(
+      //   this.ps_name,
+      //   this.page,
+      //   this.pageSize
+      // );
       //console.log(params);
-      PSDataService.getAll(params)
+      PSDataService.getAll()
         .then(response => {
           this.policeStation = response.data;
           this.count=response.data.length;

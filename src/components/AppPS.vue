@@ -44,6 +44,12 @@
                     <input type="text" class="form-control" placeholder="Search by Police Station Name" @keyup="searchPoliceStation" v-model="ps_name"/>                    
                   </div>
 
+                  <b-pagination
+                    v-model="currentPage"
+                    :total-rows="count"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+                  ></b-pagination>
 
                   <div class="text-info">{{count}} Records Found</div>
                   <table class="table table-bordered">
@@ -99,41 +105,14 @@ export default {
   data() {
     return {
       ps_name:"",
-      policeStation: [],
-      perPage: 10,      
-      count:0,
-      page: 1,      
-      pageSize: 10,      
+      policeStation: [],      
+      count:0,      
+      perPage: 10,
+      currentPage: 1,     
     };
   },
-  methods: {
-    getRequestParams(search_ps_name, page, pageSize) {
-      let params = {};
-      if (search_ps_name) {
-        params["ps_name"] = search_ps_name;
-      }
-      if (page) {
-        params["page"] = page - 1;
-      }
-      if (pageSize) {
-        params["size"] = pageSize;
-      }
-      
-      return params;
-      
-    },
-    handlePageChange(value) {
-      this.page = value;
-      this.retrievePoliceStation();
-    },
-
-    retrievePoliceStation() {
-      // const params = this.getRequestParams(
-      //   this.ps_name,
-      //   this.page,
-      //   this.pageSize
-      // );
-      //console.log(params);
+  methods: {    
+    retrievePoliceStation() {     
       PSDataService.getAll()
         .then(response => {
           this.policeStation = response.data;

@@ -219,7 +219,7 @@ export default {
   mounted() {
     UploadService.getFiles().then((response) => {
       this.imageInfos = response.data;
-      //console.log(this.imageInfos);
+      //console.log(response.data);
     });
   },
 }

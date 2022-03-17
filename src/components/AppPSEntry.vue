@@ -57,6 +57,9 @@
                     <label for="phoneno">Police Station Phone No</label>
                     <input type="text" class="form-control" id="phoneno" v-model="policeStation.ps_phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
                   </div>
+
+                  
+
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">                  
@@ -68,6 +71,43 @@
                 </div>
               </form>
             </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Upload Image</h3>
+                  </div>
+                  <div class="card-body">
+                    <form @submit.prevent="upload" method="post" enctype="multipart/form-data">                  
+                        <div class="form-group">
+                              <label for="phoneno">Add Image</label>
+                              <input type="file" accept="image/*" ref="file" @change="selectImage" />
+                              <button type="submit" class="btn btn-success" :disabled="!currentImage">Upload</button>
+                        </div>                                         
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Preview Image</h3>
+                  </div>
+                  <div class="card-body">
+                    <img :src="previewImage" width="250" class="img img-responsive" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <span v-for="(img, index) in imageInfos" :key="index">
+                <a :href="img" data-lightbox="image-1" data-title="Images">
+                  <img :src="img" width="100" class="img img-thumbnail" />  
+                </a>
+            </span>
+
             <!-- /.card -->
             </div>
             </div>
@@ -84,6 +124,8 @@
 <script>
 import PSDataService from "../services/PSDataService";
 //import axios from 'axios'
+import UploadService from "../services/UploadFilesService";
+
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -102,7 +144,13 @@ export default {
         ps_emailid: "",
         ps_phoneno:""
       },
-      submitted: false
+      submitted: false,
+
+      currentImage : undefined,
+      previewImage : undefined,
+      progress : 0,
+      message:"",
+      imageInfos: [],
     };
   },
   methods: {
@@ -133,15 +181,47 @@ export default {
         .catch(e => {
           console.log(e);
         }); 
-     
-
       },
-    
     newPoliceStation() {
       this.submitted = false;
       this.policeStation = {};
-    }
-  }
+    },
+    selectImage() {
+      this.currentImage = this.$refs.file.files.item(0);
+      this.previewImage = URL.createObjectURL(this.currentImage);
+      this.progress = 0;
+      this.message = "";
+      //console.log(this.currentImage);
+      //console.log(this.previewImage);
+
+    },
+    upload() {
+      
+      UploadService.upload(this.currentImage, (event) => {
+        this.progress = Math.round((100 * event.loaded) / event.total);
+
+      })
+        .then((response) => {
+          this.message = response.data;
+          //console.log(this.message);
+          this.$swal.fire(this.message,'','success');
+          return UploadService.getFiles();
+        })
+        .then((images) => {
+          this.imageInfos = images.data;
+        })
+        .catch((err) => {          
+          this.message = "Could not upload the image! " + err;
+          this.currentImage = undefined;
+        });
+    },
+  },
+  mounted() {
+    UploadService.getFiles().then((response) => {
+      this.imageInfos = response.data;
+      //console.log(this.imageInfos);
+    });
+  },
 }
 </script>
 

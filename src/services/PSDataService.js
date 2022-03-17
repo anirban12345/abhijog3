@@ -1,5 +1,5 @@
 import http from "../http-common";
-import axios from "axios";
+//import axios from "axios";
 
 class PSDataService {
   getAll() {
@@ -27,8 +27,8 @@ class PSDataService {
   }
 
   findByPSname(psname) {
-    return axios.get(`http://localhost:8080/MyApi/SearchApi/get_by_ps_name/${psname}`);
-  }
+    return http.get(`/SearchApi/get_by_ps_name/${psname}`);
+  }  
 }
 
 export default new PSDataService();

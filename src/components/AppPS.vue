@@ -44,13 +44,6 @@
                     <input type="text" class="form-control" placeholder="Search by Police Station Name" @keyup="searchPoliceStation" v-model="ps_name"/>                    
                   </div>
 
-                  <b-pagination
-                    v-model="currentPage"
-                    :total-rows="count"
-                    :per-page="perPage"
-                    aria-controls="my-table"
-                  ></b-pagination>
-
                   <div class="text-info">{{count}} Records Found</div>
                   <table class="table table-bordered">
                     <tr>
@@ -104,20 +97,21 @@ export default {
   },
   data() {
     return {
-      ps_name:"",
-      policeStation: [],      
-      count:0,      
-      perPage: 10,
-      currentPage: 1,     
-    };
+            ps_name:"",
+            policeStation: [],      
+            page: 1,
+            count: 0,
+            pageSize: 3
+      }   
   },
   methods: {    
-    retrievePoliceStation() {     
+
+    retrievePoliceStation() { 
       PSDataService.getAll()
         .then(response => {
           this.policeStation = response.data;
           this.count=response.data.length;
-          //console.log(this.count);
+          //console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -128,10 +122,9 @@ export default {
       {
         PSDataService.findByPSname(this.ps_name)
           .then(response => {
-
             this.policeStation = response.data;
-            //this.setActiveTutorial(null);
-            console.log(response.data);
+            this.count=response.data.length;
+            //console.log(response.data);
           })
           .catch(e => {
             console.log(e);

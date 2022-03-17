@@ -82,7 +82,8 @@
                     <form @submit.prevent="upload" method="post" enctype="multipart/form-data">                  
                         <div class="form-group">
                               <label for="phoneno">Add Image</label>
-                              <input type="file" accept="image/*" ref="file" @change="selectImage" />
+                              <input class="form-control" type="file" accept="image/*" ref="file" @change="selectImage" />
+                              <br />
                               <button type="submit" class="btn btn-success" :disabled="!currentImage">Upload</button>
                         </div>                                         
                     </form>
@@ -96,17 +97,28 @@
                     <h3 class="card-title">Preview Image</h3>
                   </div>
                   <div class="card-body">
+                    <a :href="previewImage" data-lightbox="image-1" data-title="Images">
                     <img :src="previewImage" width="250" class="img img-responsive" />
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <span v-for="(img, index) in imageInfos" :key="index">
-                <a :href="img" data-lightbox="image-1" data-title="Images">
-                  <img :src="img" width="100" class="img img-thumbnail" />  
-                </a>
-            </span>
+              <div class="col-12">
+                <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Uploaded Image</h3>
+                  </div>
+                  <div class="card-body">
+                      <span v-for="(img, index) in imageInfos" :key="index">
+                          <a :href="img" data-lightbox="image-1" data-title="Images">
+                            <img :src="img" width="100" class="img img-thumbnail" />  
+                          </a>
+                      </span>
+                  </div>
+                </div>
+              </div>
 
             <!-- /.card -->
             </div>

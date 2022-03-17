@@ -45,6 +45,7 @@
                   </div>
 
                   <div class="text-info">{{count}} Records Found</div>
+
                   <table class="table table-bordered">
                     <tr>
                       <th>Sl No.</th> 

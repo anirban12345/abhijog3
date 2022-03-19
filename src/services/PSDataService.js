@@ -11,7 +11,11 @@ class PSDataService {
   }
 
   create(data) {    
-    return http.post("/PSApi", data);
+    return http.post("/PSApi", data,{
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },      
+    });
   }
 
   update(id, data) {
@@ -29,6 +33,11 @@ class PSDataService {
   findByPSname(psname) {
     return http.get(`/SearchApi/get_by_ps_name/${psname}`);
   }  
+
+  getFiles() {
+    return http.get("/SearchApi/get_all_files");
+  }
+
 }
 
 export default new PSDataService();

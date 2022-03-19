@@ -57,6 +57,13 @@
                     <label for="phoneno">Police Station Phone No</label>
                     <input type="text" class="form-control" id="phoneno" v-model="policeStation.ps_phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
                   </div>
+                  <div class="form-group">
+                    <label for="image">Police Station Image</label>
+                    <br/>
+                    <a :href="policeStation.ps_image" data-lightbox="image-1" data-title="Images">
+                            <img :src="policeStation.ps_image" width="500" class="img img-responsive" />  
+                    </a>
+                  </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">                  
@@ -115,11 +122,12 @@ export default {
 
     async updatePoliceStation() {
       
-      const data = {        
+      const data = {                
         ps_name: this.policeStation.ps_name,
         ps_address: this.policeStation.ps_address,
         ps_emailid: this.policeStation.ps_emailid,
         ps_phoneno: this.policeStation.ps_phoneno,
+        ps_image: this.policeStation.ps_image,
       }            
       console.log(data);
       PSDataService.update(this.policeStation.ps_id, data)

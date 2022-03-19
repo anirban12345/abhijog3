@@ -48,15 +48,21 @@
 
                   <table class="table table-bordered">
                     <tr>
-                      <th>Sl No.</th> 
-                       <th>Police Station Name</th> 
-                       <th>Address</th> 
-                       <th>Email Id</th> 
-                       <th>Phone No</th> 
-                       <th>Action</th> 
+                        <th>Sl No.</th> 
+                        <th>Police Station Image</th> 
+                        <th>Police Station Name</th> 
+                        <th>Address</th> 
+                        <th>Email Id</th> 
+                        <th>Phone No</th> 
+                        <th>Action</th> 
                     </tr>
                     <tr v-for="(ps, index) in policeStation" :key="index">
                       <td>{{index+1}}</td>
+                      <td>
+                          <a :href="ps.ps_image" data-lightbox="image-1" data-title="Images">
+                            <img :src="ps.ps_image" width="100" class="img img-responsive" />  
+                          </a>
+                      </td>
                       <td>{{ps.ps_name}}</td>
                       <td>{{ps.ps_address}}</td>
                       <td>{{ps.ps_emailid}}</td>

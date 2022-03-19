@@ -57,13 +57,14 @@
                     <label for="phoneno">Police Station Phone No</label>
                     <input type="text" class="form-control" id="phoneno" v-model="policeStation.ps_phoneno" name="phoneno" placeholder="Enter Police Station Phone No" autocomplete="off" />
                   </div>
-
-                  
-
+                  <div class="form-group">
+                    <label for="phoneno">Add Image</label>
+                    <input class="form-control" type="file" accept="image/*" ref="file" @change="selectImage" />                    
+                  </div>    
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">                  
-                  <button type="submit" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success" :disabled="!policeStation.ps_image">Save</button>
                 </div>
                 </div>
                 <div v-else>                  
@@ -73,25 +74,7 @@
             </div>
 
             <div class="row">
-              <div class="col-6">
-                <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Upload Image</h3>
-                  </div>
-                  <div class="card-body">
-                    <form @submit.prevent="upload" method="post" enctype="multipart/form-data">                  
-                        <div class="form-group">
-                              <label for="phoneno">Add Image</label>
-                              <input class="form-control" type="file" accept="image/*" ref="file" @change="selectImage" />
-                              <br />
-                              <button type="submit" class="btn btn-success" :disabled="!currentImage">Upload</button>
-                        </div>                                         
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6">
+              <div class="col-12">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h3 class="card-title">Preview Image</h3>
@@ -104,21 +87,6 @@
                 </div>
               </div>
             </div>
-
-              <div class="col-12">
-                <div class="card card-success">
-                  <div class="card-header">
-                    <h3 class="card-title">Uploaded Image</h3>
-                  </div>
-                  <div class="card-body">
-                      <span v-for="(img, index) in imageInfos" :key="index">
-                          <a :href="img" data-lightbox="image-1" data-title="Images">
-                            <img :src="img" width="100" class="img img-thumbnail" />  
-                          </a>
-                      </span>
-                  </div>
-                </div>
-              </div>
 
             <!-- /.card -->
             </div>
@@ -136,8 +104,6 @@
 <script>
 import PSDataService from "../services/PSDataService";
 //import axios from 'axios'
-import UploadService from "../services/UploadFilesService";
-
 
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
@@ -154,11 +120,11 @@ export default {
         ps_name: "",
         ps_address: "",
         ps_emailid: "",
-        ps_phoneno:""
+        ps_phoneno:"",
+        ps_image:""
       },
       submitted: false,
 
-      currentImage : undefined,
       previewImage : undefined,
       progress : 0,
       message:"",
@@ -168,56 +134,20 @@ export default {
   methods: {
     async savePoliceStation() {
 
-      var data = {
-        ps_name: this.policeStation.ps_name,
-        ps_address: this.policeStation.ps_address,
-        ps_emailid: this.policeStation.ps_emailid,
-        ps_phoneno: this.policeStation.ps_phoneno,
-      }
-      //console.log(data);
+      var formData = new FormData();
+      formData.append('ps_name', this.policeStation.ps_name);
+      formData.append('ps_address', this.policeStation.ps_address);
+      formData.append('ps_emailid', this.policeStation.ps_emailid);
+      formData.append('ps_phoneno', this.policeStation.ps_phoneno);
+      formData.append("userfile", this.policeStation.ps_image);
 
-      var form = new FormData();
-      form.append('ps_name', data.ps_name);
-      form.append('ps_address', data.ps_address);
-      form.append('ps_emailid', data.ps_emailid);
-      form.append('ps_phoneno', data.ps_phoneno);
-
-      PSDataService.create(form)
-        .then(response => {
-          //this.policeStation.id = response.data.id;
-          //console.log(response.data);
-          this.submitted = true;
-          this.$swal.fire(response.data[0],'','success');
-          this.policeStation=[];
-        })
-        .catch(e => {
-          console.log(e);
-        }); 
-      },
-    newPoliceStation() {
-      this.submitted = false;
-      this.policeStation = {};
-    },
-    selectImage() {
-      this.currentImage = this.$refs.file.files.item(0);
-      this.previewImage = URL.createObjectURL(this.currentImage);
-      this.progress = 0;
-      this.message = "";
-      //console.log(this.currentImage);
-      //console.log(this.previewImage);
-
-    },
-    upload() {
-      
-      UploadService.upload(this.currentImage, (event) => {
+      PSDataService.create(formData, (event) => {
         this.progress = Math.round((100 * event.loaded) / event.total);
-
       })
         .then((response) => {
           this.message = response.data;
           //console.log(this.message);
-          this.$swal.fire(this.message,'','success');
-          return UploadService.getFiles();
+          this.$swal.fire(this.message,'','success');          
         })
         .then((images) => {
           this.imageInfos = images.data;
@@ -226,13 +156,23 @@ export default {
           this.message = "Could not upload the image! " + err;
           this.currentImage = undefined;
         });
+      },
+    newPoliceStation() {
+      this.submitted = false;
+      this.policeStation = {};
     },
+    selectImage() {
+      this.policeStation.ps_image = this.$refs.file.files.item(0);
+      this.previewImage = URL.createObjectURL(this.policeStation.ps_image);
+      this.progress = 0;
+      this.message = "";
+      //console.log(this.ps_image);
+      //console.log(this.previewImage);
+
+    },    
   },
   mounted() {
-    UploadService.getFiles().then((response) => {
-      this.imageInfos = response.data;
-      //console.log(response.data);
-    });
+    
   },
 }
 </script>

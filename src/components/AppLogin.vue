@@ -32,7 +32,8 @@
           <!-- /.col -->
         </div>
 
-        <div v-if="show" class="text-success">{{msg}}</div>
+        <div class="text-center" :class="status?'text-success':'text-danger'">{{msg}}</div>
+        
       </form>
       
       <!-- /.social-auth-links -->
@@ -53,7 +54,7 @@ export default {
         username:"",
         password:"",
         msg:"",
-        show:false
+        status:false
     }
     },
     methods: {
@@ -69,7 +70,7 @@ export default {
         .then(response => {          
           //console.log(response.data);
            this.msg= response.data.msg;
-           this.show=true;
+           this.status=response.data.status;
         })
         .catch(e => {
           console.log(e);

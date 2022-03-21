@@ -105,15 +105,19 @@ export default {
   data() {
     return {
             ps_name:"",
-            policeStation: [],      
-            page: 1,
-            count: 0,
-            pageSize: 3
+            policeStation: [],    
+            perPage: 10,
+            currentPage: 1,
+            count:0
       }   
   },
+  computed: {
+      rows() {
+        return this.policeStation.length
+      }
+    },
   methods: {    
-
-    retrievePoliceStation() { 
+    retrievePoliceStation() {       
       PSDataService.getAll()
         .then(response => {
           this.policeStation = response.data;

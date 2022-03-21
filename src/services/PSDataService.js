@@ -38,6 +38,16 @@ class PSDataService {
     return http.get("/SearchApi/get_all_files");
   }
 
+  getByPagination(psname,page,per_page)
+  {
+    return http.get(`/SearchApi/dataByPagination/${psname}/${page}/${per_page}`);
+  }
+
+  checkLogin(data)
+  {
+    return http.post('/Login/checklogin',data);
+  }
+
 }
 
 export default new PSDataService();

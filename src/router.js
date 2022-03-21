@@ -1,11 +1,13 @@
 import {createRouter,createWebHistory} from 'vue-router'
+import AppLogin from './components/AppLogin'
 import AppHome from './components/AppHome'
 import AppPSEntry from './components/AppPSEntry'
 import AppPSEdit from './components/AppPSEdit'
 import AppPS from './components/AppPS'
 
 const routes = [
-    { path: '/', component: AppHome },
+    { path: '/', component: AppLogin },
+    { path: '/home', component: AppHome },
     { path: '/psentry', component: AppPSEntry },
     { path: '/psedit/:id', component: AppPSEdit },    
     { path: '/pssearch', component: AppPS },    

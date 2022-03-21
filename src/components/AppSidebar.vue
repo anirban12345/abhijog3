@@ -56,35 +56,33 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/psentry" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Entry</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pssearch" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> Search</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/pssearch" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> About</router-link>
+                <router-link  v-for="item in list" :key="item.to" :to="item.to" class="nav-link "><i class="nav-icon far fa-circle text-info"></i> {{item.title}}</router-link>
               </li>
             </ul>
           </li>
-          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
-
 </div>
-   
-    
 </template>
-
 <script>
 export default {
   name: 'AppSidebar',  
   props:{
     title: String
-  },   
+  },  
+  data()
+  {
+    return{
+          list: [
+                  { title: "Entry", to: "/psentry" },
+                  { title: "Search", to: "/pssearch" },
+                ]
+    }
+  } 
 }
 </script>
 

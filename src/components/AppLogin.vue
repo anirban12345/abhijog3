@@ -33,7 +33,7 @@
         </div>
 
         <div class="text-center" :class="status?'text-success':'text-danger'">{{msg}}</div>
-        
+
       </form>
       
       <!-- /.social-auth-links -->
@@ -69,8 +69,18 @@ export default {
       PSDataService.checkLogin(formData)
         .then(response => {          
           //console.log(response.data);
-           this.msg= response.data.msg;
-           this.status=response.data.status;
+           //this.msg= response.data.msg;
+           //this.status=response.data.status;
+          if(response.data.status)
+          {
+           this.$store.commit('isLoggedin', response.data.status);
+           this.$router.push("/home");
+          }
+          else
+          {
+            this.msg= response.data.msg;
+            this.status=response.data.status;
+          }
         })
         .catch(e => {
           console.log(e);

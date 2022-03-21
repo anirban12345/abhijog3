@@ -117,7 +117,11 @@ export default {
   name: 'AppHome',
   components:{
      AppHeader,AppSidebar,AppFooter, 
-  },  
+  },
+  created () {
+    console.log('state', this.$store);
+    this.$store.getters.Data;
+  },
   data()
   {
     return{

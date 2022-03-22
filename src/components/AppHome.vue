@@ -93,9 +93,14 @@
         </div>
         <!-- /.row -->
         <!-- Main row -->
-        <div class="row">
-          
-          
+        <div class="row"> 
+          <div class="col-lg-12 col-12">        
+            <div class="alert alert-primary text-center">
+                Welcome {{userdata.u_title}} 
+                <br/>User Level {{userdata.ug_name}}
+                <br />User From {{userdata.u_datetime}}
+            </div>
+          </div>
         </div>
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
@@ -124,11 +129,22 @@ export default {
   data()
   {
     return{
-        countps:""
+        countps:"",
+        userdata:[]
     }
   },
   methods:{
+
+  
+    increment() {
+      
+    },
+
     retrievePoliceStation() {
+
+      //this.$store.commit('funIsLoggedin')
+      //console.log(this.$store.state.isLoggedin)
+
           // const params = this.getRequestParams(
           //   this.ps_name,
           //   this.page,
@@ -140,6 +156,9 @@ export default {
               //this.policeStation = response.data;
               this.countps=response.data.length;
               //console.log(this.count);
+              let userdata = JSON.parse(localStorage.getItem('userdata')); 
+              this.userdata = userdata[0];            
+              //console.log(userdata);
             })
             .catch(e => {
               console.log(e);

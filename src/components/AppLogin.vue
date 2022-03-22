@@ -73,11 +73,13 @@ export default {
            //this.status=response.data.status;
           if(response.data.status)
           {
-           this.$router.push("/home");
+            localStorage.setItem('userdata', JSON.stringify(response.data.data)); 
+            localStorage.setItem('loggedin', JSON.stringify(response.data.status)); 
+            this.$router.push("/home");
           }
           else
           {
-            this.msg= response.data.msg;
+            this.msg= response.data.msg;            
             this.status=response.data.status;
           }
         })

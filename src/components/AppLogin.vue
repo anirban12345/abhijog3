@@ -73,7 +73,6 @@ export default {
            //this.status=response.data.status;
           if(response.data.status)
           {
-           this.$store.commit('isLoggedin', response.data.status);
            this.$router.push("/home");
           }
           else

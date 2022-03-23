@@ -138,7 +138,15 @@ export default {
   {
     return{
         countps:0,
-        userdata:[]
+        userdata:[],
+
+        chartArr: [],
+        ChartColors: {
+        borderColor: "#077187",
+        pointBorderColor: "#0E1428",
+        pointBackgroundColor: "#AFD6AC",
+        backgroundColor: "#74A57F"
+      },
     }
   },
   methods:{

@@ -32,7 +32,7 @@
           <!-- /.col -->
         </div>
 
-        <div class="text-center" :class="status?'text-success':'text-danger'">{{msg}}</div>
+        <!-- <div class="text-center" :class="status?'text-success':'text-danger'">{{msg}}</div> -->
 
       </form>
       
@@ -81,6 +81,7 @@ export default {
           {
             this.msg= response.data.msg;            
             this.status=response.data.status;
+            this.$swal.fire(this.msg,'','error');
           }
         })
         .catch(e => {

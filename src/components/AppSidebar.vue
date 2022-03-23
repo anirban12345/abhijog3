@@ -60,6 +60,9 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">            
+            <a @click="logout" href="#" class="nav-link"><i class="nav-icon fas fa-sign-out-alt"></i>Log Out</a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -82,7 +85,14 @@ export default {
                   { title: "Search", to: "/pssearch" },
                 ]
     }
-  } 
+  },
+  methods:{
+    logout() 
+    {
+      localStorage.clear();
+      this.$router.push("/login");            
+    }
+  }
 }
 </script>
 

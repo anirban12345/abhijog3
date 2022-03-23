@@ -129,22 +129,16 @@ export default {
   data()
   {
     return{
-        countps:"",
+        countps:0,
         userdata:[]
     }
   },
   methods:{
-
-  
-    increment() {
-      
+    increment() {      
     },
-
-    retrievePoliceStation() {
-
+    retrievePoliceStation(){
       //this.$store.commit('funIsLoggedin')
       //console.log(this.$store.state.isLoggedin)
-
           // const params = this.getRequestParams(
           //   this.ps_name,
           //   this.page,

@@ -1,12 +1,9 @@
 <template>
-  <div>
-
   <!--  <AppHeader />
     <AppSidebar title="Abhijog" />
     <AppHome />
     <AppFooter />-->
-  <router-view></router-view>
-  </div>
+  <router-view></router-view>  
 </template>
 <script>
 

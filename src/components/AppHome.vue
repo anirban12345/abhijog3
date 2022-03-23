@@ -102,6 +102,13 @@
             </div>
           </div>
         </div>
+
+        <div class="row"> 
+          <div class="col-lg-12 col-12">   
+            
+          </div>
+        </div>
+
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
@@ -113,19 +120,20 @@
 </template>
 <script>
 import PSDataService from "../services/PSDataService";
-
 import AppHeader from './AppHeader.vue'
 import AppSidebar from './AppSidebar.vue'
 import AppFooter from './AppFooter.vue'
+//import { Bar } from 'vue-chartjs'
+//import LineChart from './LineChart.vue'
+import axios from "axios";
+//import moment from "moment";
 
 export default {
   name: 'AppHome',
   components:{
-     AppHeader,AppSidebar,AppFooter, 
-  },
-  created () {
-    
-  },
+     AppHeader,AppSidebar,AppFooter,
+     //LineChart 
+  },  
   data()
   {
     return{
@@ -134,8 +142,6 @@ export default {
     }
   },
   methods:{
-    increment() {      
-    },
     retrievePoliceStation(){
       //this.$store.commit('funIsLoggedin')
       //console.log(this.$store.state.isLoggedin)
@@ -162,6 +168,17 @@ export default {
   mounted()
   {
     this.retrievePoliceStation();
+
+  },
+   async created() {
+    const { data } = await axios.get("https://scientificwing.kolkatapolice.org/Abhijog/Api/printCurrentMonthComplainDisposedPendingGraph");
+
+    data.forEach(d => {
+      //const date = moment("20200323", "YYYYMMDD").format("DD-MMM-YYYY");
+      //this.arrPositive.push({ date, total: positive });      
+      //console.log(date);
+      console.log(d);
+    });
   }
 }
 </script>
